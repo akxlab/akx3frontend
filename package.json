@@ -1,11 +1,23 @@
 {
   "private": true,
   "scripts": {
-    "dev": "nuxi dev",
-    "build": "nuxi build",
-    "start": "node .output/server/index.mjs"
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "nuxt3": "latest"
+    "nuxt": "3.0.0-rc.11",
+    "@vueuse/core": "^8.7.5",
+    "@vueuse/nuxt": "^8.7.5"
+  },
+  "dependencies": {
+    "@metamask/detect-provider": "^1.2.0",
+    "ethers": "^5.7.1",
+    "mdi": "^2.2.43",
+    "nuxt-web3.js": "^0.1.4",
+    "sass": "^1.55.0",
+    "vuetify": "^3.0.0-beta.11"
   }
 }
