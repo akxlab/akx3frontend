@@ -1,7 +1,7 @@
 import { ethers } from 'ethers'
 import detectEthereumProvider from '@metamask/detect-provider'
 import Vue from "vue";
-
+const LABZ_ADDRESS = '0xEeF80FC4Cb371F9e00E71EC80ea7D49e004Edb9F';
 export default function() {
 
 
@@ -53,6 +53,22 @@ export default function() {
     await connection.provider.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: useRuntimeConfig().public.NETWORK_ID }] })
   }
 
+  const addToken = async () => {
+    connection = await getProvider();
+    await connection.provider.request({
+      method: 'wallet_watchAsset',
+      params: {
+        type: 'ERC20',
+        options: {
+          address: LABZ_ADDRESS,
+          symbol: 'LABZ',
+          decimals: 18,
+          image: 'https://www.akxipfs.com/ipfs/QmUo7nywxScoWnwoMekNxFPTaJmoKKaDNiqnVeiY4eJBBk'
+        }
+      }
+    })
+  }
+
   const getChainId = async () => {
     connection = await getProvider();
    
@@ -82,6 +98,7 @@ export default function() {
     getProvider,
     getSigner,
     isMetamaskInstalled,
-    detectEthereumProvider
+    detectEthereumProvider,
+    addToken
   }
 }

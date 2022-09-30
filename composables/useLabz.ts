@@ -1,11 +1,11 @@
 import { ethers } from 'ethers'
 import useUtils from './useUtils'
 import useWallet from './useWallet'
-import {ABI} from '../abis/IdentityRegistry'
+import {LABZABI, SALEABI} from "../abis/PrivateSale";
 
 const MUMBAI_ADDRESS = "";
 const POLYGON_ADDRESS = "";
-const GOERLI_ADDRESS = "0x816bdcec15fca5d8e309f985a65e62a74fbe184b";
+const LABZ_ADDRESS = '0xEeF80FC4Cb371F9e00E71EC80ea7D49e004Edb9F';
 
 
 export default function () {
@@ -13,21 +13,12 @@ export default function () {
     const {getProvider, getSigner} = useWallet();
    let conn;
    let signer;
-   let bal;
+   const labzbal = useState('labzBalance', () => null);
     (async () => {
         conn = await getProvider();
         signer = await getSigner();
     })();
-    const contract = new ethers.Contract(`${GOERLI_ADDRESS}`, ABI, signer);
-    contract.attach(`${GOERLI_ADDRESS}`);
+ 
 
-    const getLabzBalance = async (signer) => {
-        bal = await contract.balanceOf(signer.address);
-        return bal;
-    }
-
-    (async () => {
-        await getLabzBalance(signer);
-    })()
 
 }

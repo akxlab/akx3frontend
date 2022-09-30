@@ -4,8 +4,9 @@ import LoginComponent from '~~/components/auth/LoginComponent.vue';
 
 
 const { detectChain, isNetwork, loadConnectedWallet, chainId, resetUser, connectUser } = useUser()
-const { isMetamaskInstalled,   getProvider } = useWallet()
-const { address, balance, id, isAuthenticated } = useUser()
+const { isMetamaskInstalled,   getProvider, addToken } = useWallet()
+const { address, balance, id, isAuthenticated, labzbalance, buyLabz } = useUser()
+
 
 let prov:any;
 
@@ -34,6 +35,7 @@ onMounted(async () => {
     if (isNetwork.value) {
     //  await loadContractState(getProvider())
       await loadConnectedWallet(prov)
+     // await getLabzBalance();
     }
     setListeners(prov, true)
   
@@ -60,8 +62,12 @@ watch(() => isAuthenticated, () => dialog = false)
       <div>Is network: {{ isNetwork }}</div>
       <div>Is connected: {{ isAuthenticated }}</div>
       <div>Address: {{ address ?? 'null' }}</div>
-      <div>balance (MATICS): {{ balance ?? 'null' }}</div>
-      <div>identity: {{ id ?? 'null' }}</div></v-container>  
+      <div>balance: {{ balance ?? 'null' }} matics</div>
+      <div>identity: {{ id ?? 'null' }}</div>
+      <div>labz balance: {{ labzbalance ?? 'null' }} LABZ</div>
+      <div><v-btn @click="buyLabz(amountMatics)">buy labz</v-btn> <v-text-field name="amount" placeholder="amount of matic" v-model="amountMatics"></v-text-field></div>
+      <div><v-btn @click="addToken">add token to metamask</v-btn></div>
+    </v-container>  
       <v-container>    <v-row>
         <v-col>
             <slot /> 
@@ -71,3 +77,12 @@ watch(() => isAuthenticated, () => dialog = false)
        
     </v-app>
 </template>
+<script lang="ts">
+  export default {
+    data() {
+      return {
+        amountMatics: 0
+      }
+    }
+  }
+</script>
