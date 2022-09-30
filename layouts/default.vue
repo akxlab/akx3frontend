@@ -9,6 +9,7 @@ const { address, balance, id, isAuthenticated, labzbalance, buyLabz } = useUser(
 
 
 let prov:any;
+let amountMatics = 0;
 
 const onAccountsChanged = async (accounts) => {
   resetUser()
