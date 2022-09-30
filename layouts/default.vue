@@ -81,7 +81,7 @@ watch(() => isAuthenticated, () => dialog = false)
   export default {
     data() {
       return {
-        amountMatics: null
+        amountMatics: 0
       }
     },
    
