@@ -3,7 +3,7 @@ export default defineNuxtConfig({
     runtimeConfig: {
         API_URL: process.env.NUXT_APP_PROVIDER_HOST,
         public: {
-            NETWORK_ID:'0x5'
+            NETWORK_ID:'0x13881'
         }
     },
     css: ['vuetify/lib/styles/main.sass', 'mdi/css/materialdesignicons.min.css'],

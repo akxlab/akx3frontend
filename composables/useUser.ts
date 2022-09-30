@@ -2,7 +2,7 @@ import { ethers } from 'ethers'
 import useUtils from './useUtils'
 import useWallet from './useWallet'
 import {ABI} from '../abis/IdentityRegistry'
-const GOERLI_ADDRESS = "0x816bdcec15fca5d8e309f985a65e62a74fbe184b";
+const GOERLI_ADDRESS = "0x399AE34B8B0AE6e1Abc25d73EFC71cD6B781F8a6";
 
 export default function () {
 
@@ -32,9 +32,7 @@ export default function () {
     return parseFloat(ethers.utils.formatEther(balance)).toFixed(4)
   }
 
-  const contract = new ethers.Contract(`${GOERLI_ADDRESS}`, ABI, getSigner());
-  contract.attach(`${GOERLI_ADDRESS}`);
-
+ 
   const userLoading = ref(false)
 
   const resetUser = () => {
@@ -46,14 +44,14 @@ export default function () {
   }
 
   const loadUserData = async (_addy) => {
+  
     try {
+      userLoading.value = true;
       if (_addy.length) {
         address.value = _addy[0]
         //ensName.value = await lookupAddress(_addy[0])
         balance.value = await getBalance(_addy[0]).then(res => formatBalance(res))
-        await contract.createIdentity(_addy[0], _addy[0]);
-        id.value = await contract.getIdentity(_addy[0]);
-
+     
       //  if (ensName.value) ensAvatar.value = await getAvatar(ensName.value)
       } else {
         resetUser()
@@ -61,8 +59,21 @@ export default function () {
     } catch (error) {
       console.log(error)
     } finally {
-      // const sig = getSigner()
-      // connectNftContract(sig)
+      const sig = getSigner();
+    
+      const contract = new ethers.Contract(`${GOERLI_ADDRESS}`, ABI, sig);
+     contract.attach(`${GOERLI_ADDRESS}`);
+     id.value = await contract.getIdentity(_addy[0]);
+     if(id.value === null || id.value == '0x0000000000000000000000000000000000000000') {
+     const tx = await contract.createIdentity(_addy[0], _addy[0]);
+     await tx.wait();
+     id.value = await contract.getIdentity(_addy[0]);
+     }
+     
+     userLoading.value = false
+    
+   
+      
     }
   }
 
@@ -105,7 +116,8 @@ export default function () {
     resetUser,
     loadConnectedWallet,
     connectUser,
-    loadUserData
+    loadUserData,
+    id
   }
 
 }

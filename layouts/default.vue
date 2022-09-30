@@ -5,7 +5,7 @@ import LoginComponent from '~~/components/auth/LoginComponent.vue';
 
 const { detectChain, isNetwork, loadConnectedWallet, chainId, resetUser, connectUser } = useUser()
 const { isMetamaskInstalled,   getProvider } = useWallet()
-const { address, balance, username, isAuthenticated } = useUser()
+const { address, balance, id, isAuthenticated } = useUser()
 
 let prov:any;
 
@@ -61,7 +61,7 @@ watch(() => isAuthenticated, () => dialog = false)
       <div>Is connected: {{ isAuthenticated }}</div>
       <div>Address: {{ address ?? 'null' }}</div>
       <div>balance (MATICS): {{ balance ?? 'null' }}</div>
-      <div>username: {{ username ?? 'null' }}</div></v-container>  
+      <div>identity: {{ id ?? 'null' }}</div></v-container>  
       <v-container>    <v-row>
         <v-col>
             <slot /> 
