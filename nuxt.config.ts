@@ -10,6 +10,11 @@ export default defineNuxtConfig({
     build: {
       transpile: ['vuetify', '@ethersproject'],
     },
+    head: {
+      link: [
+        {rel: 'stylesheet', href:'https://use.typekit.net/tie2ewy.css'}
+      ]
+    },
     vite: {
         optimizeDeps: {
             include: ['bn.js', 'js-sha3', 'hash.js', 'aes-js', 'scrypt-js', 'bech32']
