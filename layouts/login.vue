@@ -57,40 +57,40 @@ watch(() => isAuthenticated, () => dialog = false)
 <v-container fluid style="margin:0;padding:0">     
 
   <v-row no-gutters>
-    <v-col lg="4" style="height:100vh;text-align:center" >
-      <v-card theme="light" color="#22519c" height="100vh">
+    <v-col cols="12" md="6" lg="5" xl="4" style="height:100vh;text-align:center" >
+      <v-card theme="light" color="#22519c" height="100%">
       <v-img src="https://www.akxipfs.com/ipfs/QmUo7nywxScoWnwoMekNxFPTaJmoKKaDNiqnVeiY4eJBBk" width="200" class="ml-auto mr-auto pt-12 mt-5" />
       <v-card-text>
        <v-row>
-        <v-col cols="10">
-          <h1 class="title pt-5 pl-10"> Start your journey <br />with AKX<sup>3</sup>.</h1>
-          <p class="intro pt-5 pl-10">Welcome to AKX<sup>3</sup> ecosystem DAPP. <br/>This space will evolve continuously as we develop more features.</p>
+        <v-col cols="10" class="pa-10">
+          <h1 class="title"> Start your journey <br />with AKX<sup>3</sup>.</h1>
+          <p class="intro ">Welcome to AKX<sup>3</sup> ecosystem DAPP. <br/>This space will evolve continuously as we develop more features.</p>
         </v-col>
        </v-row>
       </v-card-text>
     </v-card>
 
     </v-col>
-    <v-col lg="8" style="height:100vh;">
+    <v-col cols="12" md="6" lg="7" xl="8" style="height:100vh;">
       <v-row>
-        <v-col lg="10" class="ml-auto mr-auto">
+        <v-col lg="10" class="ml-auto mr-auto pa-10">
           <v-card elevation="0" style="margin-top:25%;">
         <v-card-text>
          <v-row>
-          <v-col lg="12"  class="pa-8">
+          <v-col lg="12" >
             <h2 class="title">please login or signup</h2>
           </v-col>
-          <v-col lg="6" class="pa-8">
+          <v-col lg="6" >
             <h3>OPTION 1 Create an on-chain identity (RECOMMENDED)</h3>
             <p class="note">* a small 0.01 matics fee will be charged for signing your identity<br /> <a href="#">click here to know what is it</a> <br /></p>
            
             </v-col>
            
-              <v-col lg="6"  class="pa-8"> <h3>OPTION 2 Already have an online identity <br />or don't want one.</h3>
+              <v-col lg="6"  > <h3>OPTION 2 Already have an online identity <br />or don't want one.</h3>
            
           </v-col>
-          <v-col lg="6"  class="pa-8"> <v-btn size="large" class="mt-4" color="secondary">CONNECT AND CREATE MY IDENTITY</v-btn></v-col>
-          <v-col lg="6"  class="pa-8"> <v-btn size="large" class="mt-4" color="primary">CONNECT WITH METAMASK</v-btn></v-col>
+          <v-col lg="6"  > <v-btn size="x-large" color="secondary">CREATE MY IDENTITY</v-btn></v-col>
+          <v-col lg="6"  > <v-btn size="x-large"  color="primary">CONNECT WITH METAMASK</v-btn></v-col>
          </v-row> 
   
         </v-card-text>
@@ -133,6 +133,7 @@ html, body {
     line-height:4rem;
     margin-top:15%;
     font-family: sofia-pro, sans-serif !important;
+    margin-bottom:25px;
 
 font-weight: 600;
 
