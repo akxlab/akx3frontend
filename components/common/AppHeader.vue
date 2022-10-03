@@ -14,9 +14,12 @@
             <div style="font-size:0.8rem" class="pr-2"><strong>MY MATICS:</strong> <span style="color:#009fe3; font-size:1rem">{{userProfile.balance.value}}</span> Matics</div>
             <v-divider vertical class="mx-2"></v-divider>
             <div style="font-size:0.8rem" class="pl-2"><strong>MY TOKENS:</strong> <span style="color:#009fe3; font-size:1rem">{{userProfile.labz.value}}</span> AKX</div>
+            <v-divider vertical class="mx-2"></v-divider>
+            <div style="font-size:0.8rem" class="pl-2"><strong>AKXID: <span style="color:#009fe3; font-size:0.7rem">{{userProfile.identity.value}}</span></strong></div>
             <v-spacer></v-spacer>
             <v-menu  origin="auto" min-width="300" max-width="1000">
     <template v-slot:activator="{ props }">
+        
                 <v-btn   v-bind="props" elevation="0" size="large"
         
         plain class="pa-0 px-1">
