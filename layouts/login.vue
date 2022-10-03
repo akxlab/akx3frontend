@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
-const props = defineProps<{connect: Function, isAuth: Boolean}>()
+
+const props = defineProps<{connect: Function}>()
 
 const agreeToFee = useState("agreefee", () => false);
 const agreeToWallet =  useState("agreewallet", () => false);
@@ -14,9 +15,11 @@ const agreeFee = function(state:boolean) {
 
 const identityDialog = useState("showIdentityDialog", () => false);
 
-const auth = ref(props.isAuth);
+const isLoggedIn = useCookie<Boolean>('isLoggedIn');
 
-
+   if(isLoggedIn.value == true) {
+    navigateTo('/dashboard');
+  }
 
 useHead({
   title: "AKX3 Ecosystem DAPP"
@@ -64,7 +67,7 @@ useHead({
             </v-col>
            <v-divider vertical class="mx-4"></v-divider>
               <v-col lg="5"  > <h3><strong>OPTION 2</strong> Already have an online identity or don't want one.</h3>
-                <v-btn variant="flat"  color="primary" class="mt-3" @click="connect()">CONNECT WITH METAMASK</v-btn>
+                <v-btn variant="flat"  color="primary" class="mt-3" @click="props.connect()">CONNECT WITH METAMASK</v-btn>
                 
           </v-col>
        

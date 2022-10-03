@@ -1,5 +1,10 @@
 <script setup lang="ts">
-    
+
+const router = useRouter();
+      const isLoggedIn = useCookie<Boolean>('isLoggedIn');
+        if(isLoggedIn.value == true) {
+            router.push('/dashboard')
+        }
     definePageMeta({
         layout: "login"
     })

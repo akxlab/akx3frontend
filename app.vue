@@ -2,15 +2,15 @@
 import { createDOMCompilerError } from '@vue/compiler-dom';
 import { routerKey } from 'vue-router';
 
-
+   const isLoggedIn = useCookie<Boolean>('isLoggedIn');
+      isLoggedIn.value = false; 
+      const router = useRouter();
    
    const config = useAppConfig();
    const { detectChain, isNetwork, loadConnectedWallet, chainId, resetUser, connectUser } = useUser()
    const { isMetamaskInstalled,   getProvider, addToken } = useWallet()
    const { address, balance, id, isAuthenticated, labzbalance, buyLabz } = useUser()
    
-   
-   const layout = useState('layout', () => "login")
    let prov:any;
   
    const onAccountsChanged = async (accounts) => {
@@ -32,12 +32,12 @@ import { routerKey } from 'vue-router';
      }
    }
 
- 
-   
+    
 
    onMounted(async () => {
    
        prov = await getProvider()
+     
        await detectChain()
        if (isNetwork.value) {
        //  await loadContractState(getProvider())
@@ -55,11 +55,13 @@ import { routerKey } from 'vue-router';
 
    let dialog = true;
    watch(() => isAuthenticated, () => dialog = false)
-   const router = useRouter();
+   watch(() => isAuthenticated.value, () => {
+      isLoggedIn.value = true;
+     
+   });
 
-   watchEffect(() => {
-      isAuthenticated.value == true ? router.push('/dashboard') : null;
-   })
+
+   
 
 
    
@@ -69,7 +71,8 @@ import { routerKey } from 'vue-router';
 
 <template>
  
- <NuxtLayout layout="login"  :connect="connectUser" :isAuth="isAuthenticated">
+ <NuxtLayout layout="login"  :connect="connectUser" >
+  
    <NuxtLoadingIndicator />
     <NuxtPage />
  </NuxtLayout>
