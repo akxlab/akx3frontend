@@ -6,7 +6,9 @@ export default defineNuxtConfig({
             NETWORK_ID:'0x13881'
         }
     },
-    css: ['vuetify/lib/styles/main.sass', 'mdi/css/materialdesignicons.min.css'],
+    globalName: 'AKX3',
+    css: ['vuetify/lib/styles/main.sass'],
+   
     build: {
       transpile: ['vuetify', '@ethersproject'],
     },
@@ -22,5 +24,10 @@ export default defineNuxtConfig({
       define: {
         'process.env.DEBUG': false,
       },
+     
+    },
+    experimental: {
+      reactivityTransform: true
     }
+    
 })
