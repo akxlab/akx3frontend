@@ -1,15 +1,4 @@
 <script setup lang="ts">
-import AppHeader from '~~/components/common/AppHeader.vue';
-import LoginComponent from '~~/components/auth/LoginComponent.vue';
-
-
-const { detectChain, isNetwork, loadConnectedWallet, chainId, resetUser, connectUser } = useUser()
-const { isMetamaskInstalled,   getProvider, addToken } = useWallet()
-const { address, balance, id, isAuthenticated, labzbalance, buyLabz } = useUser()
-
-
-let prov:any;
-let amountMatics;
 const agreeToFee = useState("agreefee", () => false);
 const agreeToWallet =  useState("agreewallet", () => false);
 const hidebanner =  useState("hideban", () => false);
@@ -22,42 +11,9 @@ const agreeFee = function(state:boolean) {
 
 const identityDialog = useState("showIdentityDialog", () => false);
 
-const onAccountsChanged = async (accounts) => {
-  resetUser()
-  if (isNetwork.value)  loadConnectedWallet(prov)
-}
-const onChainChanged = (chain) => {
-  chainId.value = chain
-  if (isNetwork.value) loadConnectedWallet(prov)
-  if (!isNetwork.value) resetUser()
-}
-const setListeners = (prov, bool) => {
-  if (bool) {
-    prov.on('accountsChanged', onAccountsChanged)
-    prov.on('chainChanged', onChainChanged)
-  } else {
-   // prov.removeListener('accountsChanged', onAccountsChanged)
-   // prov.removeListener('chainChanged', onChainChanged)
-  }
-}
-onMounted(async () => {
-  
-    prov = await getProvider()
-    await detectChain()
-    if (isNetwork.value) {
-    //  await loadContractState(getProvider())
-      await loadConnectedWallet(prov)
-     // await getLabzBalance();
-    }
-    setListeners(prov, true)
-  
+useHead({
+  title: "AKX3 Ecosystem DAPP"
 })
-onUnmounted(() => {
-  if (isMetamaskInstalled.value) setListeners(null, false)
-})
-
-let dialog = true;
-watch(() => isAuthenticated, () => dialog = false)
 
 </script>
 <template>
@@ -123,7 +79,7 @@ watch(() => isAuthenticated, () => dialog = false)
         <v-row class="mb-3">
           <v-col class="pt-10">You will need Polygon matics to create your identity. Approximately 0.01 matics is charged by the network for signing your identity. <v-btn variant="text" @click="hidebanner=false" prepend-icon="mdi-information">need help to get matics? click here</v-btn>
             <v-banner lines="two" class="rounded-lg mt-3" theme="light" v-show="!hidebanner">
-    <v-banner-icon ></v-banner-icon>
+   
 
     <v-banner-text>
      If you are new to the Polygon Network, we advise you to follow the small tutorial to know how to add the network to your metamask wallet and how to get Polygon Matics.
