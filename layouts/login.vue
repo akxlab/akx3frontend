@@ -141,8 +141,8 @@ watch(() => isAuthenticated, () => dialog = false)
         <v-divider></v-divider>
        <v-row class="mt-3">
         <v-col>Tick the checkboxes below to continue
-        <v-checkbox hide-details label="I agree that the Polygon Network will charge me to sign my identity." v-model="agreeToWallet" @click="agreeFee"></v-checkbox>
-        <v-checkbox hide-details label="I agree to connect to the AKX3 network with my Metamask wallet." v-model="agreeToFee" @click="agreeWallet"></v-checkbox></v-col>
+        <v-checkbox hide-details label="I agree that the Polygon Network will charge me to sign my identity." v-model="agreeToFee" @click="agreeFee(!agreeToFee.valueOf())"></v-checkbox>
+        <v-checkbox hide-details label="I agree to connect to the AKX3 network with my Metamask wallet." v-model="agreeToWallet" @click="agreeWallet(!agreeToWallet.valueOf())"></v-checkbox></v-col>
        </v-row>
        <v-divider></v-divider>
        <v-row class="mt-3">
