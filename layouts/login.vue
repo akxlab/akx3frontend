@@ -10,9 +10,17 @@ const { address, balance, id, isAuthenticated, labzbalance, buyLabz } = useUser(
 
 let prov:any;
 let amountMatics;
-let agreeToFee = false;
-let agreeToWallet = false;
-let hidebanner = true;
+const agreeToFee = useState("agreefee", () => false);
+const agreeToWallet =  useState("agreewallet", () => false);
+const hidebanner =  useState("hideban", () => false);
+const agreeFee = function(state:boolean) {
+        agreeToFee.value = state;
+      }
+      const agreeWallet = function(state:boolean) {
+        agreeToWallet.value = state;
+      }
+
+const identityDialog = useState("showIdentityDialog", () => false);
 
 const onAccountsChanged = async (accounts) => {
   resetUser()
@@ -133,8 +141,8 @@ watch(() => isAuthenticated, () => dialog = false)
         <v-divider></v-divider>
        <v-row class="mt-3">
         <v-col>Tick the checkboxes below to continue
-        <v-checkbox hide-details label="I agree that the Polygon Network will charge me to sign my identity." v-model="agreeToFee"></v-checkbox>
-        <v-checkbox hide-details label="I agree to connect to the AKX3 network with my Metamask wallet." v-model="agreeToWallet"></v-checkbox></v-col>
+        <v-checkbox hide-details label="I agree that the Polygon Network will charge me to sign my identity." v-model="agreeToWallet" @click="agreeFee"></v-checkbox>
+        <v-checkbox hide-details label="I agree to connect to the AKX3 network with my Metamask wallet." v-model="agreeToFee" @click="agreeWallet"></v-checkbox></v-col>
        </v-row>
        <v-divider></v-divider>
        <v-row class="mt-3">
@@ -143,7 +151,7 @@ watch(() => isAuthenticated, () => dialog = false)
         </v-col>
        
         <v-col cols="12" lg="6">
-          <v-btn variant="outlined" :disabled="(agreeToFee == false || agreeToWallet == false)" append-icon="mdi-arrow-right" >CONTINUE</v-btn>
+          <v-btn variant="outlined" :disabled="agreeToWallet == false || agreeToFee == false" append-icon="mdi-arrow-right" >CONTINUE</v-btn>
         </v-col>
       </v-row>
        
@@ -159,19 +167,3 @@ watch(() => isAuthenticated, () => dialog = false)
        
     </v-app>
 </template>
-<script lang="ts">
-  export default {
-   
-    data() {
-      return {
-        amountMatics: 0,
-        identityDialog: false,
-        agreeToFee:false,
-        agreeToWallet:false,
-        hidebanner:false
-      }
-    },
-   
-  }
-</script>
-

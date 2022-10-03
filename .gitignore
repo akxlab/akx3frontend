@@ -92,3 +92,5 @@ sw.*
 
 # Vercel
 .vercel
+
+.output
