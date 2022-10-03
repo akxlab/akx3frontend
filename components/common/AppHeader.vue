@@ -9,20 +9,20 @@
  
         <v-app-bar app>
             <v-app-bar-nav-icon></v-app-bar-nav-icon>
-            <v-toolbar-title>AKX3 DAPP</v-toolbar-title>
+            <v-toolbar-title> <v-img src="https://www.akxipfs.com/ipfs/QmUo7nywxScoWnwoMekNxFPTaJmoKKaDNiqnVeiY4eJBBk" width="60" /></v-toolbar-title>
             
-            <div style="font-size:0.8rem" class="pr-2"><strong>MY MATICS:</strong> <span style="color:lightgreen; font-size:1rem">{{userProfile.balance.value}}</span> Matics</div>
+            <div style="font-size:0.8rem" class="pr-2"><strong>MY MATICS:</strong> <span style="color:#009fe3; font-size:1rem">{{userProfile.balance.value}}</span> Matics</div>
             <v-divider vertical class="mx-2"></v-divider>
-            <div style="font-size:0.8rem" class="pl-2"><strong>MY TOKENS:</strong> <span style="color:lightgreen; font-size:1rem">{{userProfile.labz.value}}</span> AKX</div>
+            <div style="font-size:0.8rem" class="pl-2"><strong>MY TOKENS:</strong> <span style="color:#009fe3; font-size:1rem">{{userProfile.labz.value}}</span> AKX</div>
             <v-spacer></v-spacer>
             <v-menu  origin="auto" min-width="300" max-width="1000">
     <template v-slot:activator="{ props }">
                 <v-btn   v-bind="props" elevation="0" size="large"
         
         plain class="pa-0 px-1">
-        <div style="color:#fff;font-size:0.7rem" class="ml-2">account</div>
-        <v-avatar size="55" class="rounded-circle" color="white">
-          <img src="/avatars/avatar1.png" width="35" alt="tmp" />
+     
+        <v-avatar size="45" color="white" style="background-color:#347ed4;">
+          <img src="/avatars/avatar1.png" width="30" alt="tmp" />
         </v-avatar>
         
     </v-btn></template>

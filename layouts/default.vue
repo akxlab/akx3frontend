@@ -76,7 +76,7 @@ userProfile.value = upj;
       
       <div><v-btn @click="buyLabz(amountMatics)">buy labz</v-btn> <v-text-field label="amount of matic" type="numeric" v-model="amountMatics"></v-text-field></div>
       <div><v-btn @click="addToken">add token to metamask</v-btn>
-      <v-btn @click="logout">LOGOUT</v-btn></div>
+  </div>
     </v-container>  
       <v-container>    <v-row>
         <v-col>
