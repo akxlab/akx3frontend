@@ -1,4 +1,7 @@
 <script setup lang="ts">
+
+const props = defineProps<{connect: Function}>()
+
 const agreeToFee = useState("agreefee", () => false);
 const agreeToWallet =  useState("agreewallet", () => false);
 const hidebanner =  useState("hideban", () => false);
@@ -42,6 +45,7 @@ useHead({
       <v-row>
         <v-col lg="10" class="ml-auto mr-auto pa-10">
           <v-card elevation="0" style="margin-top:25vh;" class="rounded-lg surface-gradient">
+
             <v-card-title class="pa-8">
               <h2 class="title">please login or signup</h2>
             </v-card-title>
@@ -56,7 +60,7 @@ useHead({
             </v-col>
            <v-divider vertical class="mx-4"></v-divider>
               <v-col lg="5"  > <h3><strong>OPTION 2</strong> Already have an online identity or don't want one.</h3>
-                <v-btn variant="flat"  color="primary" class="mt-3">CONNECT WITH METAMASK</v-btn>
+                <v-btn variant="flat"  color="primary" class="mt-3" @click="connect()">CONNECT WITH METAMASK</v-btn>
                 
           </v-col>
        
@@ -97,8 +101,8 @@ useHead({
         <v-divider></v-divider>
        <v-row class="mt-3">
         <v-col>Tick the checkboxes below to continue
-        <v-checkbox hide-details label="I agree that the Polygon Network will charge me to sign my identity." v-model="agreeToFee" @click="agreeFee(!agreeToFee.valueOf())"></v-checkbox>
-        <v-checkbox hide-details label="I agree to connect to the AKX3 network with my Metamask wallet." v-model="agreeToWallet" @click="agreeWallet(!agreeToWallet.valueOf())"></v-checkbox></v-col>
+        <v-checkbox hide-details label="I agree that the Polygon Network will charge me to sign my identity." v-model="agreeToFee"></v-checkbox>
+        <v-checkbox hide-details label="I agree to connect to the AKX3 network with my Metamask wallet." v-model="agreeToWallet"></v-checkbox></v-col>
        </v-row>
        <v-divider></v-divider>
        <v-row class="mt-3">

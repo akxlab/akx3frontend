@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { createDOMCompilerError } from '@vue/compiler-dom';
+
 
    
    const config = useAppConfig();
@@ -7,6 +9,7 @@
    const { address, balance, id, isAuthenticated, labzbalance, buyLabz } = useUser()
    
    
+   const layout = useState('layout', () => "login")
    let prov:any;
   
    const onAccountsChanged = async (accounts) => {
@@ -23,10 +26,13 @@
        prov.on('accountsChanged', onAccountsChanged)
        prov.on('chainChanged', onChainChanged)
      } else {
-      // prov.removeListener('accountsChanged', onAccountsChanged)
-      // prov.removeListener('chainChanged', onChainChanged)
+       prov.removeListener('accountsChanged', onAccountsChanged)
+   prov.removeListener('chainChanged', onChainChanged)
      }
    }
+
+  
+
    onMounted(async () => {
      
        prov = await getProvider()
@@ -34,6 +40,7 @@
        if (isNetwork.value) {
        //  await loadContractState(getProvider())
          await loadConnectedWallet(prov)
+       
         // await getLabzBalance();
        }
        setListeners(prov, true)
@@ -42,14 +49,23 @@
    onUnmounted(() => {
      if (isMetamaskInstalled.value) setListeners(null, false)
    })
+
+ 
    
    let dialog = true;
    watch(() => isAuthenticated, () => dialog = false)
+
+   if(isAuthenticated) {
+      layout.value = "default";
+   }
+  
+   
    
    </script>
-<template>
 
- <NuxtLayout name="login">
+<template>
+ 
+ <NuxtLayout  :name='layout' :connect="connectUser">
    <NuxtLoadingIndicator />
     <NuxtPage />
  </NuxtLayout>
