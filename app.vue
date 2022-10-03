@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { createDOMCompilerError } from '@vue/compiler-dom';
+import { routerKey } from 'vue-router';
 
 
    
@@ -31,16 +32,17 @@ import { createDOMCompilerError } from '@vue/compiler-dom';
      }
    }
 
-  
+ 
+   
 
    onMounted(async () => {
-     
+   
        prov = await getProvider()
        await detectChain()
        if (isNetwork.value) {
        //  await loadContractState(getProvider())
          await loadConnectedWallet(prov)
-       
+         
         // await getLabzBalance();
        }
        setListeners(prov, true)
@@ -50,22 +52,24 @@ import { createDOMCompilerError } from '@vue/compiler-dom';
      if (isMetamaskInstalled.value) setListeners(null, false)
    })
 
- 
-   
+
    let dialog = true;
    watch(() => isAuthenticated, () => dialog = false)
+   const router = useRouter();
 
-   if(isAuthenticated) {
-      layout.value = "default";
-   }
-  
+   watchEffect(() => {
+      isAuthenticated.value == true ? router.push('/dashboard') : null;
+   })
+
+
+   
    
    
    </script>
 
 <template>
  
- <NuxtLayout  :name='layout' :connect="connectUser">
+ <NuxtLayout layout="login"  :connect="connectUser" :isAuth="isAuthenticated">
    <NuxtLoadingIndicator />
     <NuxtPage />
  </NuxtLayout>

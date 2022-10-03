@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-const props = defineProps<{connect: Function}>()
+const props = defineProps<{connect: Function, isAuth: Boolean}>()
 
 const agreeToFee = useState("agreefee", () => false);
 const agreeToWallet =  useState("agreewallet", () => false);
@@ -13,6 +13,10 @@ const agreeFee = function(state:boolean) {
       }
 
 const identityDialog = useState("showIdentityDialog", () => false);
+
+const auth = ref(props.isAuth);
+
+
 
 useHead({
   title: "AKX3 Ecosystem DAPP"
