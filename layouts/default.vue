@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AppHeader from '~~/components/common/AppHeader.vue';
 import LoginComponent from '~~/components/auth/LoginComponent.vue';
+import LoginComponentVue from '~~/components/auth/LoginComponent.vue';
 
 
 const { detectChain, isNetwork, loadConnectedWallet, chainId, resetUser, connectUser } = useUser()
@@ -25,8 +26,8 @@ const setListeners = (prov, bool) => {
     prov.on('accountsChanged', onAccountsChanged)
     prov.on('chainChanged', onChainChanged)
   } else {
-   // prov.removeListener('accountsChanged', onAccountsChanged)
-   // prov.removeListener('chainChanged', onChainChanged)
+    prov.removeListener('accountsChanged', onAccountsChanged)
+  prov.removeListener('chainChanged', onChainChanged)
   }
 }
 onMounted(async () => {
@@ -48,26 +49,34 @@ onUnmounted(() => {
 let dialog = true;
 watch(() => isAuthenticated, () => dialog = false)
 
+const logout = async () => {
+  const isLoggedIn = useCookie<Boolean>('isLoggedIn');
+    resetUser();
+    isLoggedIn.value = false;
+    navigateTo('/');
+}
+
+const upj ={
+  address: address,
+  balance: balance,
+  labz: labzbalance,
+  identity: id
+};
+const userProfile = useCookie<any>("userProfile");
+userProfile.value = upj;
+
 </script>
 <template>
     <v-app theme="dark">
-        <AppHeader />
+        <AppHeader :userProfile="upj" />
         <v-main>
 
 <v-container fluid>     
-    <div v-if="!isAuthenticated && isNetwork">
-        <v-dialog v-model="dialog" persistent><LoginComponent :is-authenticated="isAuthenticated" :is-connected="isAuthenticated" :connect-func="connectUser" /></v-dialog>
-    </div>
-
-   
-      <div>Is network: {{ isNetwork }}</div>
-      <div>Is connected: {{ isAuthenticated }}</div>
-      <div>Address: {{ address ?? 'null' }}</div>
-      <div>balance: {{ balance ?? 'null' }} matics</div>
-      <div>identity: {{ id ?? 'null' }}</div>
-      <div>labz balance: {{ labzbalance ?? 'null' }} LABZ</div>
+      
+      
       <div><v-btn @click="buyLabz(amountMatics)">buy labz</v-btn> <v-text-field label="amount of matic" type="numeric" v-model="amountMatics"></v-text-field></div>
-      <div><v-btn @click="addToken">add token to metamask</v-btn></div>
+      <div><v-btn @click="addToken">add token to metamask</v-btn>
+      <v-btn @click="logout">LOGOUT</v-btn></div>
     </v-container>  
       <v-container>    <v-row>
         <v-col>
