@@ -1,11 +1,33 @@
-<script setup lang="ts">
+import { ethers } from 'ethers'
 
-   const isLoggedIn = useCookie<Boolean>('isLoggedIn');
+
+
+export default function() {
+    const isLoggedIn = useCookie<Boolean>('isLoggedIn');
       isLoggedIn.value = false; 
 
    
    const { detectChain, isNetwork, loadConnectedWallet, chainId, resetUser, connectUser } = useUser()
-   const { isMetamaskInstalled,   getProvider, addToken } = useWallet()
+   const {     connection,
+    provider,
+    signer,
+    connectProvider,
+    signMessage,
+    requestAccounts,
+    getCurrentUser,
+    getBalance,
+    lookupAddress,
+    getAvatar,
+    request,
+    switchNetwork,
+    getChainId,
+    getProvider,
+    getSigner,
+    isMetamaskInstalled,
+    detectEthereumProvider,
+    addToken } = useWallet()
+
+    
    const { address, balance, id, isAuthenticated, labzbalance, buyLabz } = useUser()
    
    let prov:any;
@@ -29,18 +51,14 @@
      }
    }
 
-    
-
    onMounted(async () => {
    
        prov = await getProvider()
      
        await detectChain()
        if (isNetwork.value) {
-       //  await loadContractState(getProvider())
          await loadConnectedWallet(prov)
-         
-        // await getLabzBalance();
+    
        }
        setListeners(prov, true)
      
@@ -50,46 +68,5 @@
    })
 
 
-   
-   watch(() => isAuthenticated.value, () => {
-      isLoggedIn.value = true;
-     
-   });
 
-
-   
-
-
-   
-   
-   
-   </script>
-
-<template>
- 
- <NuxtLayout layout="login"  :connect="connectUser" >
-  
-   <NuxtLoadingIndicator />
-    <NuxtPage />
- </NuxtLayout>
-</template>
-
-<style lang="css">
-   h1 {
-      font-size: 3.5rem;
-      line-height:4rem;
-      text-align:left;
-      font-family: sofia-pro-soft, sans-serif;
-      font-weight:700;
-      font-style:normal;
-   }
-
-   h3 {
-      font-size: 1rem;
-      line-height:1.5rem;
-      text-align:left;
-      font-family: sofia-pro-soft, sans-serif;
-      font-weight:400;
-      font-style:normal;
-   }
-</style>
+}

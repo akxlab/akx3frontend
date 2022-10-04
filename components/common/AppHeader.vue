@@ -2,8 +2,10 @@
    
   const props = defineProps<{userProfile: {address: any, balance: any, labz: any, identity: any}}>();
   const userProfile = props.userProfile;
- 
-
+  const data = await useFetch('/api/pricing', {method:'get'})
+  // @ts-ignore
+  console.log(data.data);
+ const akxUsd = data.data.value.finance.USDValuePerAKX;
     
 </script><template>
  
@@ -15,7 +17,7 @@
             <v-divider vertical class="mx-2"></v-divider>
             <div style="font-size:0.8rem" class="pl-2"><strong>MY TOKENS:</strong> <span style="color:#009fe3; font-size:1rem">{{userProfile.labz.value}}</span> AKX</div>
             <v-divider vertical class="mx-2"></v-divider>
-            <div style="font-size:0.8rem" class="pl-2"><strong>AKXID: <span style="color:#009fe3; font-size:0.7rem">{{userProfile.identity.value}}</span></strong></div>
+            <div style="font-size:0.8rem" class="pl-2"><strong>AKX / USD: <span style="color:#009fe3; font-size:0.7rem">{{akxUsd}}</span></strong></div>
             <v-spacer></v-spacer>
             <v-menu  origin="auto" min-width="300" max-width="1000">
     <template v-slot:activator="{ props }">
