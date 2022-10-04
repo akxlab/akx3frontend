@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
         api: 'welcome!',
         mumbaiUri: appConfig.SERVER_PROVIDER_MUMBAI_URL,
         walletAddress: w.address,
-        walletBalance: ethers.utils.formatUnits(bal.toHexString()),
+        walletBalance: ethers.utils.formatUnits(bal),
         circulating: ethers.utils.formatEther(await contractl.totalSupply())
     }
 })
