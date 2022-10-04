@@ -6,7 +6,7 @@ export default defineNuxtConfig({
         SERVER_PROVIDER_MUMBAI_URL: process.env.NUXT_APP_MUMBAI_URL,
         SERVER_PROVIDER_GOERLI_URL: process.env.NUXT_APP_GOERLI_URL,
         PRIVATE_KEY: process.env.NUXT_APP_PRIVATE_KEY,
-        PRICE_API_URI: process.env.NUXT_APP_COINCAP_API,
+        PRICE_API_KEY: process.env.NUXT_APP_COINCAP_API,
         public: {
             NETWORK_ID:'0x13881',
             NETWORK_ETH: ''
@@ -34,6 +34,9 @@ export default defineNuxtConfig({
     },
     experimental: {
       reactivityTransform: true
+    },
+    nitro:  {
+      preset: "vercel"
     }
     
 })
