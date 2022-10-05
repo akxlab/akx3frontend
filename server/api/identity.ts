@@ -1,0 +1,1 @@
+import {ABI} from '../../abis/IdentityRegistry'
